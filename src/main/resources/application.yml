@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mahindrageodb
+    driver-class-name: org.postgresql.Driver
+    username: mahindra
+    password: mahindra
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 500
+        order_inserts: true
+        order_updates: true
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    url: /openapi/api.yaml
+  info:
+    title: Mahindra Geo API
+    version: 1.0.0
+
+# CountryStateCity API — override via CSC_API_KEY env var in production
+countrystatecity:
+  base-url: https://api.countrystatecity.in
+  api-key: ${CSC_API_KEY:9ed3f4fc88dab0f04db68d8c2c4a45049ca7291fb871b59eec844e5d91fec20c}
+  timeout-seconds: 30
+  sync-on-startup: false
+  inter-call-delay-ms: 150
+  seed-from-json: true

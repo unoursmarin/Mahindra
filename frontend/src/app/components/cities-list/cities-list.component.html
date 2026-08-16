@@ -1,0 +1,40 @@
+<div class="cities-panel" [class.visible]="visible()">
+  <div class="cities-panel__header">
+    <div class="cities-panel__title-row">
+      <span class="cities-panel__dot"></span>
+      <h3 class="cities-panel__title">Cities</h3>
+    </div>
+    @if (!isLoading()) {
+      <span class="cities-panel__count">{{ cities().length }}</span>
+    }
+  </div>
+
+  <div class="cities-panel__body">
+    @if (isLoading()) {
+      <div class="cities-panel__state">
+        <span class="cities-panel__spinner"></span>
+        Loading cities…
+      </div>
+    } @else if (cities().length === 0) {
+      <div class="cities-panel__state">No cities found</div>
+    } @else {
+      <div class="cities-panel__list">
+        @for (city of cities(); track city.id) {
+          <button class="city-row" (click)="onCityClick(city)">
+            <div class="city-row__main">
+              <span class="city-row__name">{{ city.name }}</span>
+              @if (city.stateName) {
+                <span class="city-row__state">{{ city.stateName }}</span>
+              }
+            </div>
+            @if (city.latitude !== null && city.longitude !== null) {
+              <span class="city-row__coords">
+                {{ formatCoord(city.latitude) }}, {{ formatCoord(city.longitude) }}
+              </span>
+            }
+          </button>
+        }
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div class="info-panel" [class.visible]="country() !== null">
+  <button class="close-btn" (click)="onClose()" aria-label="Close">✕</button>
+
+  @if (country(); as c) {
+    <div class="panel-content">
+      @if (c.flagUrl) {
+        <img class="flag" [src]="c.flagUrl" [alt]="c.name + ' flag'" />
+      }
+      <h2 class="country-name">
+        @if (c.emoji) {
+          <span class="emoji">{{ c.emoji }}</span>
+        }
+        {{ c.name }}
+      </h2>
+
+      <dl class="details">
+        @if (c.capital) {
+          <dt>Capital</dt>
+          <dd>{{ c.capital }}</dd>
+        }
+        @if (c.region) {
+          <dt>Region</dt>
+          <dd>{{ c.region }}</dd>
+        }
+        @if (c.population) {
+          <dt>Population</dt>
+          <dd>{{ formatPopulation(c.population) }}</dd>
+        }
+        @if (c.area) {
+          <dt>Area</dt>
+          <dd>{{ formatPopulation(c.area) }} km²</dd>
+        }
+        @if (c.phoneCode) {
+          <dt>Phone</dt>
+          <dd>+{{ c.phoneCode }}</dd>
+        }
+        @if (c.cca2) {
+          <dt>Code</dt>
+          <dd>{{ c.cca2 }}</dd>
+        }
+      </dl>
+    </div>
+  }
+</div>

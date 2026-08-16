@@ -1,0 +1,43 @@
+<div class="app-shell">
+  <app-map
+    (countrySelected)="onCountrySelected($event)"
+    (citySelected)="onCitySelected($event)"
+    (citiesLoaded)="onCitiesLoaded($event)"
+  />
+
+  <a
+    class="tm-logo"
+    href="https://www.techmahindra.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Tech Mahindra"
+  >
+    <img src="https://www.techmahindra.com/favicon.ico" alt="" width="18" height="18" />
+    <span>Tech Mahindra</span>
+  </a>
+
+  @if (selectedCountry() !== null) {
+    <button class="back-btn" (click)="resetToGlobe()" aria-label="Back to globe">
+      ← Globe
+    </button>
+  }
+
+  <app-cities-list
+    [cities]="cities()"
+    [countryName]="selectedCountry()?.name ?? null"
+    [visible]="selectedCountry() !== null"
+    [isLoading]="citiesLoading()"
+    (cityClicked)="onCitySelected($event)"
+  />
+
+  <app-country-info
+    [country]="selectedCountry()"
+    (close)="onCountrySelected(null)"
+  />
+
+  <app-city-info
+    [city]="selectedCity()"
+    [countryName]="selectedCountry()?.name ?? null"
+    (close)="onCitySelected(null)"
+  />
+</div>
