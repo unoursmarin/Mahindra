@@ -24,10 +24,8 @@ springdoc:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
-    url: /openapi/api.yaml
-  info:
-    title: Mahindra Geo API
-    version: 1.0.0
+    tags-sorter: alpha
+    operations-sorter: alpha
 
 # CountryStateCity API — override via CSC_API_KEY env var in production
 countrystatecity:
