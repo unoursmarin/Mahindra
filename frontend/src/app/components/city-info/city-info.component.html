@@ -1,0 +1,37 @@
+@if (city()) {
+  <div class="city-panel">
+    <div class="city-panel__header">
+      <h3 class="city-panel__title">{{ city()!.name }}</h3>
+      <button class="city-panel__close" (click)="onClose()" aria-label="Close">✕</button>
+    </div>
+
+    <div class="city-panel__body">
+      @if (city()!.stateName) {
+        <div class="city-panel__row">
+          <span class="city-panel__label">State</span>
+          <span class="city-panel__value">
+            {{ city()!.stateName }}
+            @if (city()!.stateCode) { <span class="city-panel__code">({{ city()!.stateCode }})</span> }
+          </span>
+        </div>
+      }
+
+      @if (countryName()) {
+        <div class="city-panel__row">
+          <span class="city-panel__label">Country</span>
+          <span class="city-panel__value">{{ countryName() }}</span>
+        </div>
+      }
+
+      <div class="city-panel__row">
+        <span class="city-panel__label">Latitude</span>
+        <span class="city-panel__value city-panel__mono">{{ formatCoord(city()!.latitude) }}</span>
+      </div>
+
+      <div class="city-panel__row">
+        <span class="city-panel__label">Longitude</span>
+        <span class="city-panel__value city-panel__mono">{{ formatCoord(city()!.longitude) }}</span>
+      </div>
+    </div>
+  </div>
+}
